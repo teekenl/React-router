@@ -16,6 +16,7 @@ class App extends Component {
                         <IndexRoute components={{title:Title,subTitle:SubTitle}} />
                     </Route>
                     <Route path="about(/:name)" component={About} />
+                    <Route path="query" component={Query} />
                     <Route path='*' component={NotFound} />
 
                 </Route>
@@ -42,22 +43,25 @@ const NamedComponents = (props) => (
     </div>
 );
 // Customize to receive the parameter of name from url.
-const About = ()=>  (props) => (
+const About = (props) => (
     <div>
         <h3>Welcome to the About us.</h3>
         <h2>{props.params.name}</h2>
     </div>
+);
+const Query = (props)=> (
+    <h2>{props.location.query.message}</h2>
 );
 const Nav = ()=> (
     <div>
         <Link onlyActiveOnIndex activeStyle={{color:'#53acff'}} to='/'>Home</Link>&nbsp;
         <Link onlyActiveOnIndex activeStyle={{color:'#53acff'}} to='/address'>Address</Link>&nbsp;
         <Link onlyActiveOnIndex activeStyle={{color:'#53acff'}} to='/about'>About</Link>&nbsp;
-        <IndexLink activeClassName='active' to='/namedComponent'>Named Components</IndexLink>
+        <IndexLink activeClassName='active' to='/namedComponent'>Named Components</IndexLink>&nbsp;
         <IndexLink
             activeClassName='active'
             to={{
-                pathname: '/address/query',
+                pathname: '/query',
                 query: { message: 'Hello from Route Query' }
             }}>Route Query</IndexLink>
     </div>
